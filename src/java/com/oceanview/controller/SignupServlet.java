@@ -16,6 +16,7 @@ public class SignupServlet extends HttpServlet {
 
         String fullname = request.getParameter("fullname");
         String username = request.getParameter("username");
+        String email = request.getParameter("email"); // ✅ new
         String password = request.getParameter("password");
         String confirmPassword = request.getParameter("confirmPassword");
 
@@ -25,14 +26,15 @@ public class SignupServlet extends HttpServlet {
             return;
         }
 
-        String sql = "INSERT INTO users(fullname, username, password) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO users(fullname, username, email, password) VALUES (?, ?, ?, ?)"; // updated
 
         try (Connection con = DBConnection.getConnection();
              PreparedStatement pst = con.prepareStatement(sql)) {
 
             pst.setString(1, fullname);
             pst.setString(2, username);
-            pst.setString(3, password);
+            pst.setString(3, email); // new
+            pst.setString(4, password);
 
             int rows = pst.executeUpdate();
 

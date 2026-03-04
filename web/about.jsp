@@ -183,7 +183,7 @@
         <div class="nav-links">
             <a href="index.html">Home</a>
             <a href="about.jsp">About</a>
-            <a href="rooms.jsp">Rooms</a>
+            <a href="availableRooms.jsp">Rooms</a>
             <a href="contact.jsp">Contact Us</a>
 
         </div>
@@ -237,7 +237,7 @@
 
         <!-- Call to Action -->
         <div class="cta-section">
-            <a href="reservation.jsp" class="btn-book">Book Your Stay</a>
+            <a href="customerLogin.jsp" class="btn-book">Book Your Stay</a>
         </div>
     </div>
 

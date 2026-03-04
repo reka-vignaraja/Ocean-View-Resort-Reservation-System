@@ -93,6 +93,7 @@
 <body>
 
 <h2>Reservation List</h2>
+<a href="dashboard.jsp" class="back-btn">Back to Dashboard</a>
 
 <table>
     <tr>
@@ -115,7 +116,7 @@
         );
 
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM reservations");
+       ResultSet rs = stmt.executeQuery("SELECT * FROM reservations ORDER BY reservation_id DESC");
 
         while (rs.next()) {
 
@@ -158,7 +159,7 @@
 
 </table>
 
-<a href="dashboard.jsp" class="back-btn">Back to Dashboard</a>
+
 
 </body>
 </html>

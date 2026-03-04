@@ -17,8 +17,19 @@ public class CustomerSignupServlet extends HttpServlet {
 
         String fullname = request.getParameter("fullname");
         String username = request.getParameter("username");
+        String email = request.getParameter("email");   // ✅ Added
         String password = request.getParameter("password");
         String confirmPassword = request.getParameter("confirmPassword");
+
+        // Check empty fields
+        if (fullname == null || username == null || email == null || 
+            password == null || confirmPassword == null ||
+            fullname.isEmpty() || username.isEmpty() || 
+            email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+
+            response.sendRedirect("customerSignup.jsp?msg=missing_fields");
+            return;
+        }
 
         // Password match check
         if (!password.equals(confirmPassword)) {
@@ -26,7 +37,7 @@ public class CustomerSignupServlet extends HttpServlet {
             return;
         }
 
-        String sql = "INSERT INTO users(fullname, username, password, role) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO users(fullname, username, password, role, email) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection con = DBConnection.getConnection();
              PreparedStatement pst = con.prepareStatement(sql)) {
@@ -34,7 +45,8 @@ public class CustomerSignupServlet extends HttpServlet {
             pst.setString(1, fullname);
             pst.setString(2, username);
             pst.setString(3, password);
-            pst.setString(4, "customer");   // 🔥 Important
+            pst.setString(4, "customer");   // default role
+            pst.setString(5, email);
 
             int rows = pst.executeUpdate();
 

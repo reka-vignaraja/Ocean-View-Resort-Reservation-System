@@ -1,4 +1,14 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%
+    // Session role check
+    String role = (String) session.getAttribute("role");
+    if(role == null){
+        response.sendRedirect("login.jsp");
+        return;
+    }
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -67,25 +77,25 @@ button:hover {
 label {
     font-size: 14px;
 }
+
 .back-btn {
-            display: inline-block;
-            margin: 40px auto;
-            padding: 12px 30px;
-            background: #2c5364;
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            transition: 0.3s;
-        }
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 25px;
+    background: #2c5364;
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    transition: 0.3s;
+}
 
-        .back-btn:hover {
-            background: #203a43;
-        }
+.back-btn:hover {
+    background: #203a43;
+}
 
-        .center {
-            text-align: center;
-        }
-
+.center {
+    text-align: center;
+}
 </style>
 </head>
 
@@ -94,11 +104,12 @@ label {
 <div class="container">
     <h2>🌊 Add New Reservation</h2>
 
+    <!-- Form POST to servlet -->
     <form action="AddReservationServlet" method="post">
 
         <label>Guest Name</label>
         <input type="text" name="guestName" required>
-       
+
         <label>Phone</label>
         <input type="text" name="phone" required>
 
@@ -116,18 +127,27 @@ label {
         <input type="date" name="checkout" required>
 
         <button type="submit">Add Reservation</button>
-         <a href="index.html" class="back-btn">← Back to Home</a>
     </form>
+
+    <div class="center">
+        <% if("customer".equals(role)){ %>
+            <a href="index.html" class="back-btn">← Back to Home</a>
+        <% } else { %>
+            <a href="dashboard.jsp" class="back-btn">← Back to Dashboard</a>
+        <% } %>
+    </div>
 </div>
 
 <%
-    String msg = request.getParameter("msg");
-    if ("success".equals(msg)) {
+    // 🔹 Refresh-safe success message
+    String successMsg = (String) session.getAttribute("successMsg");
+    if (successMsg != null) {
 %>
 <script>
-    alert("Reservation Successfully Added!");
+    alert("<%= successMsg %>");
 </script>
 <%
+        session.removeAttribute("successMsg"); // important
     }
 %>
 
