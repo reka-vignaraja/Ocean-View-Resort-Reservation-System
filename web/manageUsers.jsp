@@ -1,4 +1,6 @@
-<%@ page import="java.sql.*" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.oceanview.dao.UserDAO" %>
+<%@ page import="com.oceanview.model.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
@@ -9,6 +11,8 @@
     }
 
     String search = request.getParameter("search");
+    UserDAO dao = new UserDAO();
+    List<User> users = dao.getUsers(search);
 %>
 
 <!DOCTYPE html>
@@ -85,37 +89,15 @@
 <th>Action</th>
 </tr>
 
-<%
-try{
-    Connection con = DriverManager.getConnection(
-        "jdbc:mysql://localhost:3306/hotel_reservation","root","");
-
-    String sql = "SELECT * FROM users";
-    if(search != null && !search.trim().isEmpty()){
-        sql += " WHERE fullname LIKE ? OR username LIKE ?";
-    }
-    sql += " ORDER BY id DESC";
-
-    PreparedStatement pst = con.prepareStatement(sql);
-
-    if(search != null && !search.trim().isEmpty()){
-        pst.setString(1, "%" + search + "%");
-        pst.setString(2, "%" + search + "%");
-    }
-
-    ResultSet rs = pst.executeQuery();
-
-    while(rs.next()){
-%>
-
+<% for(User user : users){ %>
 <tr>
-<td><%= rs.getInt("id") %></td>
-<td><%= rs.getString("fullname") %></td>
-<td><%= rs.getString("username") %></td>
-<td><%= rs.getString("email") %></td>
+<td><%= user.getId() %></td>
+<td><%= user.getFullname() %></td>
+<td><%= user.getUsername() %></td>
+<td><%= user.getEmail() %></td>
 <td>
 <%
-    String role = rs.getString("role");
+    String role = user.getRole();
     if("admin".equalsIgnoreCase(role)){%>
         <span style="color:green;font-weight:bold;">Admin</span>
 <% } else if("staff".equalsIgnoreCase(role)){ %>
@@ -124,24 +106,16 @@ try{
         <span style="color:#0072b1;font-weight:bold;">Customer</span>
 <% } %>
 </td>
-<td><%= rs.getString("created_at") %></td>
+<td><%= user.getCreatedAt() %></td>
 <td>
-<button class="btn edit-btn" onclick="showEditForm('<%=rs.getInt("id")%>','<%=rs.getString("fullname")%>','<%=rs.getString("username")%>','<%=rs.getString("email")%>','<%=role%>')">Edit</button>
-
+<button class="btn edit-btn" onclick="showEditForm('<%=user.getId()%>','<%=user.getFullname()%>','<%=user.getUsername()%>','<%=user.getEmail()%>','<%=role%>')">Edit</button>
 <form action="DeleteUserServlet" method="post" style="display:inline;" onsubmit="return confirm('Delete this user?');">
-<input type="hidden" name="id" value="<%= rs.getInt("id") %>">
+<input type="hidden" name="id" value="<%= user.getId() %>">
 <button type="submit" class="btn delete-btn">Delete</button>
 </form>
 </td>
 </tr>
-
-<%
-    }
-    con.close();
-}catch(Exception e){
-    out.println("<tr><td colspan='7'>Error: "+e.getMessage()+"</td></tr>");
-}
-%>
+<% } %>
 </table>
 
 <!-- Add/Edit Form Popup -->

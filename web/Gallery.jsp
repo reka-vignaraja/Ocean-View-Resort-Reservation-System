@@ -21,14 +21,14 @@
             background:#f4f7fa;
         }
 
-        /* Navbar */
+        
        /* Navbar */
 .navbar {
-    position: fixed;      /* ADD THIS */
-    top: 0;               /* ADD THIS */
-    left: 0;              /* ADD THIS */
-    width: 100%;          /* ADD THIS */
-    z-index: 1000;        /* ADD THIS */
+    position: fixed;      
+    top: 0;               
+    left: 0;              
+    width: 100%;          
+    z-index: 1000;        
 
     display: flex;
     justify-content: space-between;

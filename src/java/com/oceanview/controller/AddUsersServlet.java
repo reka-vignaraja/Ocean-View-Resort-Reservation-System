@@ -14,7 +14,7 @@ public class AddUsersServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // 1️⃣ Get form parameters
+        
         String fullname = request.getParameter("fullname");
         String username = request.getParameter("username");
         String email = request.getParameter("email");
@@ -22,14 +22,14 @@ public class AddUsersServlet extends HttpServlet {
         String role = request.getParameter("role"); // "user" or "admin"
         String status = "active"; // default
 
-        // 2️⃣ Basic validation
+        
         if(fullname == null || username == null || email == null || password == null || role == null ||
            fullname.isEmpty() || username.isEmpty() || email.isEmpty() || password.isEmpty() || role.isEmpty()) {
             response.sendRedirect("manageUsers.jsp?msg=missing_fields");
             return;
         }
 
-        // 3️⃣ SQL Insert
+        // SQL Insert
         String sql = "INSERT INTO users(fullname, username, email, password, role) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection con = DBConnection.getConnection();

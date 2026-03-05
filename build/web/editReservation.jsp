@@ -1,25 +1,15 @@
 <%@ page import="java.sql.*" %>
 <%
     int id = Integer.parseInt(request.getParameter("reservation_id"));
-
-    String guestName = "";
-    String contactNumber = "";
-    String roomType = "";
-    String checkinDate = "";
-    String checkoutDate = "";
+    String guestName = "", contactNumber = "", roomType = "", checkinDate = "", checkoutDate = "";
 
     try {
         Class.forName("com.mysql.cj.jdbc.Driver");
         Connection con = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/hotel_reservation",
-                "root",
-                ""
+                "jdbc:mysql://localhost:3306/hotel_reservation", "root", ""
         );
 
-        PreparedStatement ps = con.prepareStatement(
-                "SELECT * FROM reservations WHERE reservation_id=?"
-        );
-
+        PreparedStatement ps = con.prepareStatement("SELECT * FROM reservations WHERE reservation_id=?");
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
 
@@ -34,7 +24,6 @@
         rs.close();
         ps.close();
         con.close();
-
     } catch (Exception e) {
         e.printStackTrace();
     }
@@ -50,23 +39,26 @@
 <h2>Edit Reservation</h2>
 
 <form action="EditReservationServlet" method="post">
-
     <input type="hidden" name="reservation_id" value="<%= id %>">
 
     Guest Name:
-    <input type="text" name="guest_name" value="<%= guestName %>"><br><br>
+    <input type="text" name="guest_name" value="<%= guestName %>" required><br><br>
 
     Contact Number:
-    <input type="text" name="contact_number" value="<%= contactNumber %>"><br><br>
+    <input type="text" name="contact_number" value="<%= contactNumber %>" required><br><br>
 
     Room Type:
-    <input type="text" name="room_type" value="<%= roomType %>"><br><br>
+    <select name="room_type" required>
+        <option value="Single" <%= "Single".equals(roomType) ? "selected" : "" %>>Single</option>
+        <option value="Double" <%= "Double".equals(roomType) ? "selected" : "" %>>Double</option>
+        <option value="Suite" <%= "Suite".equals(roomType) ? "selected" : "" %>>Suite</option>
+    </select><br><br>
 
     Check-in Date:
-    <input type="date" name="checkin_date" value="<%= checkinDate %>"><br><br>
+    <input type="date" name="checkin_date" value="<%= checkinDate %>" required><br><br>
 
     Check-out Date:
-    <input type="date" name="checkout_date" value="<%= checkoutDate %>"><br><br>
+    <input type="date" name="checkout_date" value="<%= checkoutDate %>" required><br><br>
 
     <button type="submit">Update Reservation</button>
 </form>
