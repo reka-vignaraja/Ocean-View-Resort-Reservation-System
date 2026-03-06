@@ -13,40 +13,40 @@
             padding: 0;
         }
 
-   .navbar {
-    position: fixed;     
-    top: 0;              
-    left: 0;              
-    width: 100%;         
-    z-index: 1000;        
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 60px;
-    background: #2c5364;
-    box-sizing: border-box;
-}
+        /* NAVBAR */
+        .navbar {
+            position: fixed;     
+            top: 0;              
+            left: 0;              
+            width: 100%;         
+            z-index: 1000;        
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 60px;
+            background: #2c5364;
+            box-sizing: border-box;
+        }
 
-.navbar h2 {
-    color: white;
-    margin: 0;          /* small alignment fix */
-}
+        .navbar h2 {
+            color: white;
+            margin: 0;
+        }
 
-.navbar a {
-    color: white;
-    text-decoration: none;
-    margin-left: 20px;
-    transition: 0.3s;
-}
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            transition: 0.3s;
+        }
 
-.navbar a:hover {
-    color: #00c6ff;
-}
-   
+        .navbar a:hover {
+            color: #00c6ff;
+        }
 
-        /* ===== PAGE CONTENT ===== */
+        /* PAGE CONTENT */
         .content {
-            margin-top: 100px;   /* IMPORTANT: prevents navbar overlap */
+            margin-top: 100px; /* prevent navbar overlap */
             padding: 20px;
         }
 
@@ -76,19 +76,6 @@
             transform: translateY(-5px);
         }
 
-        button {
-            padding: 10px 15px;
-            background-color: #1e3c72;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #16325c;
-        }
-
         .no-rooms {
             text-align: center;
             color: red;
@@ -101,7 +88,7 @@
 
 <!-- NAVBAR -->
 <div class="navbar">
-    <h2>? Ocean View Resort</h2>
+    <h2>Ocean View Resort</h2>
     <div class="nav-links">
         <a href="index.html">Home</a>
         <a href="about.jsp">About</a>
@@ -148,11 +135,6 @@ try {
         <h3><%= rs.getString("room_type") %></h3>
         <p><strong>Room No:</strong> <%= rs.getString("room_number") %></p>
         <p><strong>Price:</strong> LKR <%= rs.getDouble("price") %></p>
-
-        <form action="AddReservationServlet" method="post">
-            <input type="hidden" name="roomId" value="<%= rs.getInt("room_id") %>">
-            <button type="submit">Book Now</button>
-        </form>
     </div>
 
 <%

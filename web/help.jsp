@@ -92,7 +92,8 @@ body {
     <div>
         <a href="index.html">Home</a>
         <a href="about.jsp">About</a>
-        <a href="availableRooms.jsp">Rooms</a>
+        <a href="availableRooms
+           .jsp">Rooms</a>
         <a href="contact.jsp">Contact Us</a>
     </div>
 </div>

@@ -97,6 +97,18 @@ label {
     text-align: center;
 }
 </style>
+
+<script>
+function setCheckoutDate(){
+    
+    var checkin = document.getElementById("checkin").value;
+
+    if(checkin != ""){
+        document.getElementById("checkout").min = checkin;
+    }
+}
+</script>
+
 </head>
 
 <body>
@@ -104,7 +116,6 @@ label {
 <div class="container">
     <h2>🌊 Add New Reservation</h2>
 
-    <!-- Form POST to servlet -->
     <form action="AddReservationServlet" method="post">
 
         <label>Guest Name</label>
@@ -121,12 +132,13 @@ label {
         </select>
 
         <label>Check-in Date</label>
-        <input type="date" name="checkin" required>
+        <input type="date" id="checkin" name="checkin" onchange="setCheckoutDate()" required>
 
         <label>Check-out Date</label>
-        <input type="date" name="checkout" required>
+        <input type="date" id="checkout" name="checkout" required>
 
         <button type="submit">Add Reservation</button>
+
     </form>
 
     <div class="center">
@@ -139,15 +151,16 @@ label {
 </div>
 
 <%
-    // 🔹 Refresh-safe success message
     String successMsg = (String) session.getAttribute("successMsg");
     if (successMsg != null) {
 %>
+
 <script>
     alert("<%= successMsg %>");
 </script>
+
 <%
-        session.removeAttribute("successMsg"); // important
+        session.removeAttribute("successMsg");
     }
 %>
 

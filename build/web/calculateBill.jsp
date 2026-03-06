@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
-    // ✅ Session & Role check
+    //  Session & Role check
     if (session == null || session.getAttribute("username") == null) {
         response.sendRedirect("login.jsp");
         return;
@@ -98,7 +98,7 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
     try {
         int reservationId = Integer.parseInt(request.getParameter("reservation_id"));
 
-        // ✅ Use your DBConnection class
+        //  Use your DBConnection class
         Connection con = com.oceanview.util.DBConnection.getConnection();
         PreparedStatement ps = con.prepareStatement(
                 "SELECT * FROM reservations WHERE reservation_id = ?"

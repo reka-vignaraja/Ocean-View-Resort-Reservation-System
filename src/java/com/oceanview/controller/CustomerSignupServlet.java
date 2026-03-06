@@ -17,7 +17,7 @@ public class CustomerSignupServlet extends HttpServlet {
 
         String fullname = request.getParameter("fullname");
         String username = request.getParameter("username");
-        String email = request.getParameter("email");   // ✅ Added
+        String email = request.getParameter("email");   //  Added
         String password = request.getParameter("password");
         String confirmPassword = request.getParameter("confirmPassword");
 
