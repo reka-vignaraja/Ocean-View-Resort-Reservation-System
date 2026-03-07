@@ -29,6 +29,13 @@
             <file>file:/C:/Users/NEXT%20GEN/Documents/NetBeansProjects/OceanViewResort/web/contact.jsp</file>
             <file>file:/C:/Users/NEXT%20GEN/Documents/NetBeansProjects/OceanViewResort/web/customerLogin.jsp</file>
             <file>file:/C:/Users/NEXT%20GEN/Documents/NetBeansProjects/OceanViewResort/web/dashboard.jsp</file>
+            <file>file:/C:/Users/NEXT%20GEN/Documents/NetBeansProjects/OceanViewResort/src/java/com/oceanview/controller/LoginServlet.java</file>
+            <file>file:/C:/Users/NEXT%20GEN/Documents/NetBeansProjects/OceanViewResort/web/login.jsp</file>
+            <file>file:/C:/Users/NEXT%20GEN/Documents/NetBeansProjects/OceanViewResort/src/java/com/oceanview/dao/PaymentDAO.java</file>
+            <file>file:/C:/Users/NEXT%20GEN/Documents/NetBeansProjects/OceanViewResort/src/java/com/oceanview/controller/PaymentServlet.java</file>
+            <file>file:/C:/Users/NEXT%20GEN/Documents/NetBeansProjects/OceanViewResort/web/payment.jsp</file>
+            <file>file:/C:/Users/NEXT%20GEN/Documents/NetBeansProjects/OceanViewResort/src/java/com/oceanview/model/Payment.java</file>
+            <file>file:/C:/Users/NEXT%20GEN/Documents/NetBeansProjects/OceanViewResort/web/index.html</file>
         </group>
     </open-files>
 </project-private>

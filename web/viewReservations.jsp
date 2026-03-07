@@ -189,17 +189,17 @@ if(!status.equals("Paid")){
 
 <%
 
-}
+        }
 
-rs.close();
-stmt.close();
-con.close();
+            rs.close();
+            stmt.close();
+            con.close();
 
-}catch(Exception e){
+            }catch(Exception e){
 
-out.println("<tr><td colspan='8'>Error : "+e.getMessage()+"</td></tr>");
+            out.println("<tr><td colspan='8'>Error : "+e.getMessage()+"</td></tr>");
 
-}
+        }
 
 %>
 

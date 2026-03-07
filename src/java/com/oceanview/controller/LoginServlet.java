@@ -62,7 +62,7 @@ public class LoginServlet extends HttpServlet {
                 }
 
             } else {
-                // ❌ Login failed - redirect to correct login page
+                //  Login failed - redirect to correct login page
                 if ("customer".equals(role)) {
                     response.sendRedirect("customerLogin.jsp?error=Invalid+Username+or+Password");
                 } else {
